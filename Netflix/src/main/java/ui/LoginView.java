@@ -58,13 +58,13 @@ public class LoginView {
 	private void configureUIComponents() {
 		frmLogin = new JFrame();
 		frmLogin.getContentPane().setBackground(Color.LIGHT_GRAY);
-		frmLogin.setIconImage(Toolkit.getDefaultToolkit().getImage(LoginView.class.getResource("/Netflix/assets/images/netflix_icon.png")));
+		frmLogin.setIconImage(Toolkit.getDefaultToolkit().getImage("assets/images/netflix_icon.png"));
 		frmLogin.setBounds(100, 100, 900, 750);
 		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLogin.getContentPane().setLayout(null);
 
 		this.btnLogin = new JButton("");
-		btnLogin.setIcon(new ImageIcon(LoginView.class.getResource("/Netflix/assets/images/Login.png")));
+		btnLogin.setIcon(new ImageIcon("assets/images/Login.png"));
 		btnLogin.setBounds(482, 449, 200, 85);
 		btnLogin.setBorderPainted(false);
 		btnLogin.setContentAreaFilled(false);
@@ -73,7 +73,7 @@ public class LoginView {
 		frmLogin.getContentPane().add(btnLogin);
 
 		btnRegister = new JButton("");
-		btnRegister.setIcon(new ImageIcon(LoginView.class.getResource("/Netflix/assets/images/Register.png")));
+		btnRegister.setIcon(new ImageIcon("assets/images/Register.png"));
 		btnRegister.setBackground(Color.WHITE);
 		btnRegister.setBounds(224, 449, 200, 85);
 		btnRegister.setBorderPainted(false);
@@ -121,7 +121,7 @@ public class LoginView {
 		frmLogin.getContentPane().add(lblErrorMessage);
 		
 		btnRecuperarPasswd = new JButton("");
-		btnRecuperarPasswd.setIcon(new ImageIcon(LoginView.class.getResource("/Netflix/assets/images/ForgottenPasswd.png")));
+		btnRecuperarPasswd.setIcon(new ImageIcon("assets/images/ForgottenPasswd.png"));
 		btnRecuperarPasswd.setOpaque(false);
 		btnRecuperarPasswd.setFocusPainted(false);
 		btnRecuperarPasswd.setContentAreaFilled(false);
@@ -131,7 +131,7 @@ public class LoginView {
 		frmLogin.getContentPane().add(btnRecuperarPasswd);
 		
 		lblFondo = new JLabel("");
-		lblFondo.setIcon(new ImageIcon(LoginView.class.getResource("/Netflix/assets/images/fondo.png")));
+		lblFondo.setIcon(new ImageIcon("assets/images/fondo.png"));
 		lblFondo.setBounds(0, 0, 886, 731);
 		frmLogin.getContentPane().add(lblFondo);
 	}

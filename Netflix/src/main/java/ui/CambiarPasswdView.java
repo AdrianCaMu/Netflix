@@ -51,7 +51,7 @@ public class CambiarPasswdView {
 	private void initialize() {
 		frmChange = new JFrame();
 		frmChange.getContentPane().setBackground(Color.LIGHT_GRAY);
-		frmChange.setIconImage(Toolkit.getDefaultToolkit().getImage(CambiarPasswdView.class.getResource("/utils/images/netflix_icon.png")));
+		frmChange.setIconImage(Toolkit.getDefaultToolkit().getImage("assets/images/netflix_icon.png"));
 		configureUIComponents();
 		configureListener();	
 	}
@@ -93,7 +93,7 @@ public class CambiarPasswdView {
 		frmChange.getContentPane().add(lblPasswordConfirm);
 		
 		btnChange = new JButton("");
-		btnChange.setIcon(new ImageIcon(CambiarPasswdView.class.getResource("/utils/images/Confirm.png")));
+		btnChange.setIcon(new ImageIcon("assets/images/Confirm.png"));
 		btnChange.setBounds(353, 551, 200, 80);
 		btnChange.setBorderPainted(false); 
         btnChange.setContentAreaFilled(false); 
@@ -109,7 +109,7 @@ public class CambiarPasswdView {
 		frmChange.getContentPane().add(lblErrorMessage);
 		
 		lblFondo = new JLabel("");
-		lblFondo.setIcon(new ImageIcon(LoginView.class.getResource("/utils/images/fondo.png")));
+		lblFondo.setIcon(new ImageIcon("assets/images/fondo.png"));
 		lblFondo.setBounds(0, 0, 886, 731);
 		frmChange.getContentPane().add(lblFondo);
 	}

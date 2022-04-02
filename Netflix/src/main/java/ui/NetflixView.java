@@ -154,7 +154,7 @@ public class NetflixView {
 		frmNetflix = new JFrame();
 		frmNetflix.getContentPane().setBackground(Color.LIGHT_GRAY);
 		frmNetflix.setIconImage(
-				Toolkit.getDefaultToolkit().getImage(LoginView.class.getResource("/utils/images/netflix_icon.png")));
+				Toolkit.getDefaultToolkit().getImage("assets/images/netflix_icon.png"));
 		frmNetflix.setBounds(100, 100, 900, 750);
 		frmNetflix.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmNetflix.getContentPane().setLayout(null);

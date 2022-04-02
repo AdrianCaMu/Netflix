@@ -44,7 +44,7 @@ public class RecuperarView {
 	private void initialize() {
 		frmRecuperar = new JFrame();
 		frmRecuperar.getContentPane().setBackground(Color.LIGHT_GRAY);
-		frmRecuperar.setIconImage(Toolkit.getDefaultToolkit().getImage(RecuperarView.class.getResource("/utils/images/netflix_icon.png")));
+		frmRecuperar.setIconImage(Toolkit.getDefaultToolkit().getImage("assets/images/netflix_icon.png"));
 		configureUIComponents();
 		configureListener();	
 	}
@@ -58,7 +58,7 @@ public class RecuperarView {
 		frmRecuperar.getContentPane().setLayout(null);
 		
 		btnVolver = new JButton("");
-		btnVolver.setIcon(new ImageIcon(RecuperarView.class.getResource("/utils/images/Login.png")));
+		btnVolver.setIcon(new ImageIcon("assets/images/Login.png"));
 		btnVolver.setBounds(358, 518, 200, 80);
 		btnVolver.setBorderPainted(false); 
         btnVolver.setContentAreaFilled(false); 
@@ -67,7 +67,7 @@ public class RecuperarView {
 		frmRecuperar.getContentPane().add(btnVolver);
 		
 		btnTengoCodigo = new JButton("");
-		btnTengoCodigo.setIcon(new ImageIcon(RecuperarView.class.getResource("/utils/images/EnterCode.png")));
+		btnTengoCodigo.setIcon(new ImageIcon("assets/images/EnterCode.png"));
 		btnTengoCodigo.setBounds(358, 413, 200, 80);
 		btnTengoCodigo.setBorderPainted(false); 
         btnTengoCodigo.setContentAreaFilled(false); 
@@ -83,7 +83,7 @@ public class RecuperarView {
 		frmRecuperar.getContentPane().add(lblErrorMessage);
 		
 		btnNuevoCodigo = new JButton("");
-		btnNuevoCodigo.setIcon(new ImageIcon(RecuperarView.class.getResource("/utils/images/GenerateCode.png")));
+		btnNuevoCodigo.setIcon(new ImageIcon("assets/images/GenerateCode.png"));
 		btnNuevoCodigo.setOpaque(false);
 		btnNuevoCodigo.setFocusPainted(false);
 		btnNuevoCodigo.setContentAreaFilled(false);
@@ -92,7 +92,7 @@ public class RecuperarView {
 		frmRecuperar.getContentPane().add(btnNuevoCodigo);
 		
 		lblFondo = new JLabel("");
-		lblFondo.setIcon(new ImageIcon(LoginView.class.getResource("/utils/images/fondo.png")));
+		lblFondo.setIcon(new ImageIcon("assets/images/fondo.png"));
 		lblFondo.setBounds(0, 0, 886, 731);
 		frmRecuperar.getContentPane().add(lblFondo);
 	}
