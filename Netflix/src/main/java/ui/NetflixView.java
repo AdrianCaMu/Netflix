@@ -57,71 +57,71 @@ public class NetflixView {
 		
 		lblBuscador = new JLabel("Buscador");
 		lblBuscador.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblBuscador.setBounds(31, 627, 107, 43);
+		lblBuscador.setBounds(86, 105, 107, 43);
 		frmNetflix.getContentPane().add(lblBuscador);
 		
 		comboBox = new JComboBox();
-		comboBox.setBounds(154, 627, 214, 43);
+		comboBox.setBounds(209, 105, 214, 43);
 		frmNetflix.getContentPane().add(comboBox);
 		
 		textField = new JTextField();
-		textField.setBounds(378, 627, 313, 43);
+		textField.setBounds(433, 105, 368, 43);
 		frmNetflix.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		lblType = new JLabel("Type:");
 		lblType.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblType.setBounds(31, 209, 390, 35);
+		lblType.setBounds(86, 205, 390, 35);
 		frmNetflix.getContentPane().add(lblType);
 		
 		lblTitle = new JLabel("Title");
 		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblTitle.setBounds(31, 255, 390, 35);
+		lblTitle.setBounds(86, 251, 390, 35);
 		frmNetflix.getContentPane().add(lblTitle);
 		
 		lblDirector = new JLabel("Director:");
 		lblDirector.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblDirector.setBounds(431, 209, 390, 35);
+		lblDirector.setBounds(486, 205, 390, 35);
 		frmNetflix.getContentPane().add(lblDirector);
 		
 		lblCast = new JLabel("Cast:");
 		lblCast.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblCast.setBounds(31, 301, 790, 35);
+		lblCast.setBounds(86, 297, 790, 35);
 		frmNetflix.getContentPane().add(lblCast);
 		
 		lblCountry = new JLabel("Country:");
 		lblCountry.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblCountry.setBounds(431, 255, 390, 35);
+		lblCountry.setBounds(486, 251, 390, 35);
 		frmNetflix.getContentPane().add(lblCountry);
 		
 		lblDateAdded = new JLabel("Date added:");
 		lblDateAdded.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblDateAdded.setBounds(31, 347, 390, 35);
+		lblDateAdded.setBounds(86, 343, 390, 35);
 		frmNetflix.getContentPane().add(lblDateAdded);
 		
 		lblReleaseYear = new JLabel("Release year:");
 		lblReleaseYear.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblReleaseYear.setBounds(431, 347, 390, 35);
+		lblReleaseYear.setBounds(486, 343, 390, 35);
 		frmNetflix.getContentPane().add(lblReleaseYear);
 		
 		lblRating = new JLabel("Rating:");
 		lblRating.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblRating.setBounds(31, 393, 390, 35);
+		lblRating.setBounds(86, 389, 390, 35);
 		frmNetflix.getContentPane().add(lblRating);
 		
 		lblDurating = new JLabel("Duration:");
 		lblDurating.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblDurating.setBounds(431, 393, 390, 35);
+		lblDurating.setBounds(486, 389, 390, 35);
 		frmNetflix.getContentPane().add(lblDurating);
 		
 		lblListedIn = new JLabel("Listed In:");
 		lblListedIn.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblListedIn.setBounds(31, 449, 390, 35);
+		lblListedIn.setBounds(86, 445, 390, 35);
 		frmNetflix.getContentPane().add(lblListedIn);
 		
 		lblDescription = new JLabel("Description:");
 		lblDescription.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblDescription.setBounds(31, 495, 790, 35);
+		lblDescription.setBounds(86, 491, 790, 35);
 		frmNetflix.getContentPane().add(lblDescription);
 		
 		btnVolver = new JButton("Cerrar Sesi\u00F3n");
@@ -129,12 +129,20 @@ public class NetflixView {
 		frmNetflix.getContentPane().add(btnVolver);
 		
 		btnNext = new JButton(">");
-		btnNext.setBounds(431, 36, 390, 49);
+		btnNext.setBounds(455, 36, 408, 49);
 		frmNetflix.getContentPane().add(btnNext);
 		
 		btnPreview = new JButton("<");
-		btnPreview.setBounds(31, 36, 390, 49);
+		btnPreview.setBounds(20, 36, 408, 49);
 		frmNetflix.getContentPane().add(btnPreview);
+		
+		JButton btnFavorito = new JButton("Favorito");
+		btnFavorito.setBounds(86, 559, 120, 41);
+		frmNetflix.getContentPane().add(btnFavorito);
+		
+		JButton btnGenerarFichero = new JButton("Fichero Favoritos");
+		btnGenerarFichero.setBounds(226, 559, 120, 41);
+		frmNetflix.getContentPane().add(btnGenerarFichero);
 		configureUIComponents();
 		configureListener();
 	}

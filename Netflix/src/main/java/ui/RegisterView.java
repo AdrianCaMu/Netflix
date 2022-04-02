@@ -57,7 +57,7 @@ public class RegisterView {
 	private void initialize() {
 		frmRegister = new JFrame();
 		frmRegister.getContentPane().setBackground(Color.LIGHT_GRAY);
-		frmRegister.setIconImage(Toolkit.getDefaultToolkit().getImage(RegisterView.class.getResource("/utils/images/netflix_icon.png")));
+		frmRegister.setIconImage(Toolkit.getDefaultToolkit().getImage(RegisterView.class.getResource("/assets/images/netflix_icon.png")));
 		configureUIComponents();
 		configureListener();	
 	}
@@ -71,7 +71,7 @@ public class RegisterView {
 		frmRegister.getContentPane().setLayout(null);
 		
 		btnVolver = new JButton("");
-		btnVolver.setIcon(new ImageIcon(RegisterView.class.getResource("/utils/images/Login.png")));
+		btnVolver.setIcon(new ImageIcon(RegisterView.class.getResource("/assets/images/Login.png")));
 		btnVolver.setBounds(223, 515, 200, 80);
 		btnVolver.setBorderPainted(false); 
         btnVolver.setContentAreaFilled(false); 
@@ -124,7 +124,7 @@ public class RegisterView {
 		frmRegister.getContentPane().add(lblPasswordConfirm);
 		
 		btnRegister = new JButton("");
-		btnRegister.setIcon(new ImageIcon(RegisterView.class.getResource("/utils/images/Register.png")));
+		btnRegister.setIcon(new ImageIcon(RegisterView.class.getResource("/assets/images/Register.png")));
 		btnRegister.setBounds(483, 515, 200, 80);
 		btnRegister.setBorderPainted(false); 
         btnRegister.setContentAreaFilled(false); 
@@ -140,7 +140,7 @@ public class RegisterView {
 		frmRegister.getContentPane().add(lblErrorMessage);
 		
 		btnRecuperar = new JButton("");
-		btnRecuperar.setIcon(new ImageIcon(RegisterView.class.getResource("/utils/images/ForgottenPasswd.png")));
+		btnRecuperar.setIcon(new ImageIcon(RegisterView.class.getResource("/assets/images/ForgottenPasswd.png")));
 		btnRecuperar.setOpaque(false);
 		btnRecuperar.setFocusPainted(false);
 		btnRecuperar.setContentAreaFilled(false);
@@ -149,7 +149,7 @@ public class RegisterView {
 		frmRegister.getContentPane().add(btnRecuperar);
 		
 		lblFondo = new JLabel("");
-		lblFondo.setIcon(new ImageIcon(LoginView.class.getResource("/utils/images/fondo.png")));
+		lblFondo.setIcon(new ImageIcon(LoginView.class.getResource("/assets/images/fondo.png")));
 		lblFondo.setBounds(0, 0, 886, 731);
 		frmRegister.getContentPane().add(lblFondo);
 	}

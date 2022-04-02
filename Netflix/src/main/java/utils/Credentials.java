@@ -10,11 +10,11 @@ import com.google.gson.JsonParser;
 
 public class Credentials {
 
-	private final static String appSettingsFile = "appsettings.json";
+	private final static String appSettingsFile = "assets/appsettings.json";
 
-	
 	private static String readFromFile(String keyword) {
 		List<String> list;
+
 		try {
 			list = Files.readAllLines(new File(appSettingsFile).toPath());
 			String appsettingsContent = "";
@@ -24,12 +24,13 @@ public class Credentials {
 			JsonObject jsonObject = JsonParser.parseString(appsettingsContent).getAsJsonObject();
 
 			return jsonObject.get(keyword).getAsString();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
 	public static String correoEmailing() {
 		return readFromFile("userEmail");
 	}
