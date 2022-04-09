@@ -2,15 +2,24 @@ package ui;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
-import javax.swing.SwingConstants;
+import dao.ShowDAO;
 import dao.UserDAO;
+import models.Show;
 import java.awt.Color;
-import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class NetflixView {
 
@@ -19,33 +28,35 @@ public class NetflixView {
 	private String correo;
 	private JFrame frmNetflix;
 	private UserDAO usuarioDAO;
-	private JTextField textField;
+	private JTextField tfConsulta;
 	private JLabel lblBuscador;
-	private JLabel lblType;
-	private JComboBox comboBox;
-	private JLabel lblTitle;
-	private JLabel lblDirector;
-	private JLabel lblCast;
-	private JLabel lblCountry;
-	private JLabel lblDateAdded;
-	private JLabel lblReleaseYear;
-	private JLabel lblRating;
-	private JLabel lblDurating;
-	private JLabel lblListedIn;
-	private JLabel lblDescription;
+	private JComboBox<String> comboBox;
 	private JButton btnVolver;
 	private JButton btnNext;
 	private JButton btnPreview;
-	
+	private JButton btnBuscador;
+	private JButton btnGenerarFichero;
+	private JButton btnFavorito;
+	private ShowDAO showDAO;
+	private JButton btnRestablecer;
+	private JScrollPane scrollPane;
+	private JTextArea textAreaSeries;
+	private ArrayList<Show> lista;
+	private ArrayList<Show> fav;
+	private int count;
+
 	/**
 	 * Create the application.
 	 */
 	public NetflixView(String correo, JFrame parent) {
 		this.correo = correo;
 		this.parent = parent;
+		count = 0;
+		showDAO = new ShowDAO();
+		lista = showDAO.getAll();
 		usuarioDAO = new UserDAO();
 		initialize();
-		this.frmNetflix.setVisible(true);
+		frmNetflix.setVisible(true);
 	}
 
 	/**
@@ -53,116 +64,233 @@ public class NetflixView {
 	 */
 	private void initialize() {
 		frmNetflix = new JFrame();
-		frmNetflix.getContentPane().setLayout(null);
-		
-		lblBuscador = new JLabel("Buscador");
-		lblBuscador.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblBuscador.setBounds(86, 105, 107, 43);
-		frmNetflix.getContentPane().add(lblBuscador);
-		
-		comboBox = new JComboBox();
-		comboBox.setBounds(209, 105, 214, 43);
-		frmNetflix.getContentPane().add(comboBox);
-		
-		textField = new JTextField();
-		textField.setBounds(433, 105, 368, 43);
-		frmNetflix.getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		lblType = new JLabel("Type:");
-		lblType.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblType.setBounds(86, 205, 390, 35);
-		frmNetflix.getContentPane().add(lblType);
-		
-		lblTitle = new JLabel("Title");
-		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblTitle.setBounds(86, 251, 390, 35);
-		frmNetflix.getContentPane().add(lblTitle);
-		
-		lblDirector = new JLabel("Director:");
-		lblDirector.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblDirector.setBounds(486, 205, 390, 35);
-		frmNetflix.getContentPane().add(lblDirector);
-		
-		lblCast = new JLabel("Cast:");
-		lblCast.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblCast.setBounds(86, 297, 790, 35);
-		frmNetflix.getContentPane().add(lblCast);
-		
-		lblCountry = new JLabel("Country:");
-		lblCountry.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblCountry.setBounds(486, 251, 390, 35);
-		frmNetflix.getContentPane().add(lblCountry);
-		
-		lblDateAdded = new JLabel("Date added:");
-		lblDateAdded.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblDateAdded.setBounds(86, 343, 390, 35);
-		frmNetflix.getContentPane().add(lblDateAdded);
-		
-		lblReleaseYear = new JLabel("Release year:");
-		lblReleaseYear.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblReleaseYear.setBounds(486, 343, 390, 35);
-		frmNetflix.getContentPane().add(lblReleaseYear);
-		
-		lblRating = new JLabel("Rating:");
-		lblRating.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblRating.setBounds(86, 389, 390, 35);
-		frmNetflix.getContentPane().add(lblRating);
-		
-		lblDurating = new JLabel("Duration:");
-		lblDurating.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblDurating.setBounds(486, 389, 390, 35);
-		frmNetflix.getContentPane().add(lblDurating);
-		
-		lblListedIn = new JLabel("Listed In:");
-		lblListedIn.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblListedIn.setBounds(86, 445, 390, 35);
-		frmNetflix.getContentPane().add(lblListedIn);
-		
-		lblDescription = new JLabel("Description:");
-		lblDescription.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblDescription.setBounds(86, 491, 790, 35);
-		frmNetflix.getContentPane().add(lblDescription);
-		
-		btnVolver = new JButton("Cerrar Sesi\u00F3n");
-		btnVolver.setBounds(701, 629, 120, 41);
-		frmNetflix.getContentPane().add(btnVolver);
-		
-		btnNext = new JButton(">");
-		btnNext.setBounds(455, 36, 408, 49);
-		frmNetflix.getContentPane().add(btnNext);
-		
-		btnPreview = new JButton("<");
-		btnPreview.setBounds(20, 36, 408, 49);
-		frmNetflix.getContentPane().add(btnPreview);
-		
-		JButton btnFavorito = new JButton("Favorito");
-		btnFavorito.setBounds(86, 559, 120, 41);
-		frmNetflix.getContentPane().add(btnFavorito);
-		
-		JButton btnGenerarFichero = new JButton("Fichero Favoritos");
-		btnGenerarFichero.setBounds(226, 559, 120, 41);
-		frmNetflix.getContentPane().add(btnGenerarFichero);
 		configureUIComponents();
 		configureListener();
+		show();
 	}
 
 	/**
 	 * configuracion de los distintos elementos de la pantalla
 	 */
 	private void configureUIComponents() {
-		frmNetflix = new JFrame();
 		frmNetflix.getContentPane().setBackground(Color.LIGHT_GRAY);
-		frmNetflix.setIconImage(
-				Toolkit.getDefaultToolkit().getImage("assets/images/netflix_icon.png"));
+		frmNetflix.setIconImage(Toolkit.getDefaultToolkit().getImage("assets/images/netflix_icon.png"));
 		frmNetflix.setBounds(100, 100, 900, 750);
 		frmNetflix.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmNetflix.getContentPane().setLayout(null);
+		lblBuscador = new JLabel("Buscador");
+		lblBuscador.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblBuscador.setBounds(20, 107, 107, 43);
+		frmNetflix.getContentPane().add(lblBuscador);
+
+		comboBox = new JComboBox<>();
+		comboBox.setModel(new DefaultComboBoxModel<>(new String[] { "Title", "Country", "Director", "Release_year" }));
+		comboBox.setBounds(118, 107, 154, 43);
+		frmNetflix.getContentPane().add(comboBox);
+
+		tfConsulta = new JTextField();
+		tfConsulta.setBounds(282, 109, 321, 43);
+		frmNetflix.getContentPane().add(tfConsulta);
+		tfConsulta.setColumns(10);
+
+		btnVolver = new JButton("Cerrar Sesi\u00F3n");
+		btnVolver.setBounds(701, 629, 120, 41);
+		frmNetflix.getContentPane().add(btnVolver);
+
+		btnNext = new JButton(">");
+		btnNext.setBounds(455, 36, 408, 49);
+		frmNetflix.getContentPane().add(btnNext);
+
+		btnPreview = new JButton("<");
+		btnPreview.setBounds(20, 36, 408, 49);
+		frmNetflix.getContentPane().add(btnPreview);
+
+		btnFavorito = new JButton("Favorito");
+		btnFavorito.setBounds(86, 629, 120, 41);
+		frmNetflix.getContentPane().add(btnFavorito);
+
+		btnGenerarFichero = new JButton("Fichero Favoritos");
+		btnGenerarFichero.setBounds(226, 629, 120, 41);
+		frmNetflix.getContentPane().add(btnGenerarFichero);
+
+		btnBuscador = new JButton("Buscar");
+		btnBuscador.setBounds(613, 110, 120, 41);
+		frmNetflix.getContentPane().add(btnBuscador);
+
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(20, 179, 843, 413);
+		frmNetflix.getContentPane().add(scrollPane);
+
+		textAreaSeries = new JTextArea();
+		textAreaSeries.setEditable(false);
+		scrollPane.setViewportView(textAreaSeries);
+
+		btnRestablecer = new JButton("Restablecer");
+		btnRestablecer.setBounds(743, 110, 120, 41);
+		frmNetflix.getContentPane().add(btnRestablecer);
+
 	}
 
 	/**
 	 * configuracion de la activacion de los botones
 	 */
 	private void configureListener() {
+
+		// búsqueda de una serie en concreto
+		btnBuscador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String condition = (String) comboBox.getSelectedItem();
+				String consulta = tfConsulta.getText();
+
+				if (consulta.isBlank()) {
+					JOptionPane.showMessageDialog(frmNetflix, "Debe introducir que desea buscar", "Error de Búsqueda",
+							JOptionPane.WARNING_MESSAGE);
+				} else {
+					lista.clear();
+					lista = showDAO.getShows(condition, consulta);
+					count = 0;
+					show();
+				}
+			}
+		});
+
+		// añadir a favorita la serie visualizada en ese momento
+		btnFavorito.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (fav.contains(lista.get(count))) {
+
+					fav.remove(lista.get(count));
+
+				} else {
+
+					fav.add(lista.get(count));
+
+				}
+
+			}
+		});
+
+		// generar fichero de texto csv con los favoritos del usuario
+		btnGenerarFichero.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+
+		// ver anterior serie de la lista
+		btnPreview.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// en caso de ser el primero de la lista, el anterior será el último
+				if (count == 0) {
+					count = lista.size() - 1;
+
+					// si no es el primero de la lista, muestra el anterior
+				} else {
+					count--;
+				}
+
+				show();
+
+			}
+		});
+
+		// restablecer las series y mostrar la lista completa
+		btnRestablecer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lista.clear();
+				lista = showDAO.getAll();
+				show();
+			}
+		});
+
+		// ver siguiente serie de la lista
+		btnNext.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// en caso de ser el ultimo de la lista, el siguiente será el primero
+				if (count == lista.size() - 1) {
+					count = 0;
+
+					// si no es el ultimo de la lista, muestra el siguiente
+				} else {
+					count++;
+				}
+				show();
+			}
+		});
+	}
+
+	/**
+	 * rellenar los datos de la serie a mostrar
+	 * 
+	 * @param count numero del array de la serie a mostrar
+	 */
+	private void show() {
+		// si no hay series en la lista muestra la pantalla vacia
+		if (lista.size() == 0) {
+			mostrarVacio();
+		} else {
+			btnNext.setVisible(true);
+			btnPreview.setVisible(true);
+			lblBuscador.setVisible(true);
+			btnBuscador.setVisible(true);
+			btnFavorito.setVisible(true);
+			btnGenerarFichero.setVisible(true);
+			tfConsulta.setVisible(true);
+			comboBox.setVisible(true);
+
+			// Boton Anterior (muestra el titulo de la serie que se mostrará al hacer click)
+			if (count == 0) {
+				btnPreview.setText(lista.get(lista.size() - 1).getTitle());
+			} else {
+				btnPreview.setText(lista.get(count - 1).getTitle());
+			}
+
+			// Boton Posterior (muestra el titulo de la serie que se mostrará al hacer
+			// click)
+			if (count == lista.size() - 1) {
+				btnNext.setText(lista.get(0).getTitle());
+			} else {
+				btnNext.setText(lista.get(count + 1).getTitle());
+			}
+
+			showData();
+		}
+
+	}
+
+	private void showData() {
+		String cadena = "";
+
+		// establecemos los campos de la serie en cuestión
+		cadena += "Title: " + lista.get(count).getTitle() + "\n\n";
+		cadena += "Type: " + lista.get(count).getType() + "\n\n";
+		cadena += "Director: " + lista.get(count).getDirector() + "\n\n";
+		cadena += "Cast: " + lista.get(count).getCast() + "\n\n";
+		cadena += "Country: " + lista.get(count).getCountry() + "\n\n";
+		cadena += "Date Added: " + lista.get(count).getDate_added() + "\n\n";
+		cadena += "Release Year: " + lista.get(count).getRelease_year() + "\n\n";
+		cadena += "Rating: " + lista.get(count).getRating() + "\n\n";
+		cadena += "Duration: " + lista.get(count).getDuration() + "\n\n";
+		cadena += "Listed in: " + lista.get(count).getListed_in() + "\n\n";
+		cadena += "Description: " + lista.get(count).getDescription();
+
+		textAreaSeries.setText(cadena);
+	}
+
+	/**
+	 * En caso de no haber series en la lista se mostrará la pantalla vacia
+	 */
+	private void mostrarVacio() {
+		btnNext.setVisible(false);
+		btnPreview.setVisible(false);
+		lblBuscador.setVisible(false);
+		btnBuscador.setVisible(false);
+		btnFavorito.setVisible(false);
+		btnGenerarFichero.setVisible(false);
+		tfConsulta.setVisible(false);
+		comboBox.setVisible(false);
+		textAreaSeries.setText("La lista de Series está vacia");
+
 	}
 }

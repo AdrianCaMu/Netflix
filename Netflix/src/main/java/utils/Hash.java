@@ -4,6 +4,11 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Hashear contraseñas para mayor seguridad
+ * @author Adrian Camara Muñoz
+ *
+ */
 public class Hash {
 	
 	/**

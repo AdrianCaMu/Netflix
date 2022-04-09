@@ -56,7 +56,6 @@ public class LoginView {
 	 * configuracion de los distintos elementos de la pantalla
 	 */
 	private void configureUIComponents() {
-		frmLogin = new JFrame();
 		frmLogin.getContentPane().setBackground(Color.LIGHT_GRAY);
 		frmLogin.setIconImage(Toolkit.getDefaultToolkit().getImage("assets/images/netflix_icon.png"));
 		frmLogin.setBounds(100, 100, 900, 750);
@@ -198,6 +197,7 @@ public class LoginView {
 			boolean logicaCorrecto = usuarioDAO.login(correo, passwdCodified);
 			if (logicaCorrecto) {
 				frmLogin.dispose();
+				//new Prueba();
 				new NetflixView(correo, frmLogin);
 			} else {
 				lblErrorMessage.setText("ERROR: correo o contraseña incorrectos.");
