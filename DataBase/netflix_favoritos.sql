@@ -16,30 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `usuarios`
+-- Table structure for table `favoritos`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
+DROP TABLE IF EXISTS `favoritos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `usuarios` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `correo` mediumtext NOT NULL,
-  `password` mediumtext NOT NULL,
-  `codigo` int DEFAULT NULL,
-  `activado` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `favoritos` (
+  `id_Show` varchar(30) NOT NULL,
+  `id_User` int NOT NULL,
+  PRIMARY KEY (`id_Show`,`id_User`),
+  KEY `FK_USER` (`id_User`),
+  CONSTRAINT `FK_SERIES` FOREIGN KEY (`id_Show`) REFERENCES `series` (`id`),
+  CONSTRAINT `FK_USER` FOREIGN KEY (`id_User`) REFERENCES `usuarios` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuarios`
+-- Dumping data for table `favoritos`
 --
 
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'a_adrian.camara.munoz@iespablopicasso.es','391397f351ee094e35ec1f34fee6d9373b5123a6c3ed7729a0635ade84656393db5b2ee934e03f311360cd37c3a7bf8635538ec10e9c2db27d8b6210e65ddca0',697429,1),(2,'usuario','63ee3ece677362fae73c218b7226758d783a06d4e97f82a527556d9174c1a9c6c30c19b4a70e9fb19492a3e71c8f53b79526123187b94c9f86cc95e29d43aea4',95799,1),(3,'nachodiazdiaz18@gmail.com','63ee3ece677362fae73c218b7226758d783a06d4e97f82a527556d9174c1a9c6c30c19b4a70e9fb19492a3e71c8f53b79526123187b94c9f86cc95e29d43aea4',120890,1);
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+LOCK TABLES `favoritos` WRITE;
+/*!40000 ALTER TABLE `favoritos` DISABLE KEYS */;
+INSERT INTO `favoritos` VALUES ('s1',2),('s10',2),('s100',2),('s1000',2);
+/*!40000 ALTER TABLE `favoritos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-16 19:07:49
+-- Dump completed on 2022-04-16 19:07:50

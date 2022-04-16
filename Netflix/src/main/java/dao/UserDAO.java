@@ -80,6 +80,25 @@ public class UserDAO extends AbstractDAO{
 	}
 	
 	/**
+	 * obtener id de un usuario
+	 * @param correo correo del usuario del que queremos obtenber la id
+	 * @return id del usuario encontrado / -1 si no encuentra al usuario
+	 */
+	public int idUser(String correo) {
+		final String QUERY = "SELECT id FROM usuarios WHERE correo = '" + correo + "';";
+		try {
+			ResultSet rs = stmt.executeQuery(QUERY);
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	/**
 	 * cambiar codigo de validacion de un usuario
 	 * @param correo correo del usuario al que queremos cambiar el codigo de validacion
 	 * @param validation nuevo codigo de validacion

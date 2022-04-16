@@ -9,15 +9,48 @@ import dao.ShowDAO;
 import models.Show;
 
 /**
- * leer fichero lleno de series y peliculas para añadir a la base de datos
+ * Lectura de ficheros
+ * 
  * @author Adrian Camara Muñoz
  *
  */
-public class FileReaderDB {
-	
-	public static void llenarBD(String name) {
+public class ReaderFiles {
+	/**
+	 * Buscar Show en un fichero
+	 * 
+	 * @param show      Show a buscar
+	 * @param fileName  Nombre del archivo en el que buscar
+	 * @param separador separadores que puede contener ese fichero
+	 * @return true si encuentra el Show buscado, false si no.
+	 */
+	public boolean checkShow(Show show, String fileName) {
+		Scanner sc = null;
+		try {
+			sc = new Scanner(new File(fileName), "UTF-8");
+			while (sc.hasNextLine()) {
+				String line = sc.nextLine();
 
-		String filename = name;
+				var trozos = line.split(",|;|\t");
+
+				if (show.getShow_id().equals(trozos[0])) {
+					return true;
+				}
+			}
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		sc.close();
+		return false;
+	}
+
+	/**
+	 * copiar shows de un fichero en la base de datos
+	 * 
+	 * @param fileName Nombre del fichero a leer
+	 */
+	public static void llenarBD(String fileName) {
+
 		Scanner sc = null;
 		ArrayList<Show> shows = new ArrayList<Show>();
 		boolean isString = false;
@@ -28,12 +61,11 @@ public class FileReaderDB {
 		ShowDAO ficheros = new ShowDAO();
 
 		try {
-			sc = new Scanner(new File(filename), "UTF-8");
+			sc = new Scanner(new File(fileName), "UTF-8");
 			sc.nextLine();// cabecera
 			while (sc.hasNextLine()) {
 				count = 0;
 				String s = sc.nextLine();
-				// var trozos = s.split(",");
 				// Omite las cadenas internas ""
 				var trozos = s.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 				for (String trozo : trozos) {
@@ -72,12 +104,10 @@ public class FileReaderDB {
 				shows.add(new Show(trozos[0], trozos[1], trozos[2], trozos[3], trozos[4], trozos[5], trozos[6],
 						trozos[7], trozos[8], trozos[9], trozos[10], trozos[11]));
 				fila++;
-				System.out.println(shows.get(fila - 1));
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		sc.close();
-		System.out.println(shows.size());
 	}
 }

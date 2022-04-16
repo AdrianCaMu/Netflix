@@ -88,7 +88,7 @@ public class ShowDAO extends AbstractDAO {
 
 	/**
 	 * insertar una pelicula o serie en concreto
-	 * @param s id de la pelicula o serie a eliminar
+	 * @param s id de la pelicula o serie a añadir
 	 */
 	public void insert(Show s) {
 		final String INSERT = "INSERT INTO Series(id, type, title, director, cast, country, date_added, release_year, rating, duration, listed_in, description)"

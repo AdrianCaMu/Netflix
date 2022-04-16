@@ -5,9 +5,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+
+import dao.FavDAO;
 import dao.ShowDAO;
 import dao.UserDAO;
 import models.Show;
+import utils.FavFileWriter;
+import utils.ReaderFiles;
+
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JComboBox;
@@ -38,11 +43,13 @@ public class NetflixView {
 	private JButton btnGenerarFichero;
 	private JButton btnFavorito;
 	private ShowDAO showDAO;
+	private UserDAO userDAO;
+	private FavDAO favDAO;
+	private int idUser;
 	private JButton btnRestablecer;
 	private JScrollPane scrollPane;
 	private JTextArea textAreaSeries;
 	private ArrayList<Show> lista;
-	private ArrayList<Show> fav;
 	private int count;
 
 	/**
@@ -52,9 +59,12 @@ public class NetflixView {
 		this.correo = correo;
 		this.parent = parent;
 		count = 0;
+		favDAO = new FavDAO();
+		userDAO = new UserDAO();
 		showDAO = new ShowDAO();
 		lista = showDAO.getAll();
 		usuarioDAO = new UserDAO();
+		idUser = userDAO.idUser(correo);
 		initialize();
 		frmNetflix.setVisible(true);
 	}
@@ -106,10 +116,12 @@ public class NetflixView {
 		frmNetflix.getContentPane().add(btnPreview);
 
 		btnFavorito = new JButton("Favorito");
+		btnFavorito.setBackground(Color.LIGHT_GRAY);
 		btnFavorito.setBounds(86, 629, 120, 41);
 		frmNetflix.getContentPane().add(btnFavorito);
 
 		btnGenerarFichero = new JButton("Fichero Favoritos");
+		btnGenerarFichero.setBackground(Color.LIGHT_GRAY);
 		btnGenerarFichero.setBounds(226, 629, 120, 41);
 		frmNetflix.getContentPane().add(btnGenerarFichero);
 
@@ -135,6 +147,14 @@ public class NetflixView {
 	 * configuracion de la activacion de los botones
 	 */
 	private void configureListener() {
+		
+		//cerrar sesión y volver a pantalla de login
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmNetflix.dispose();
+				parent.setVisible(true);
+			}
+		});
 
 		// búsqueda de una serie en concreto
 		btnBuscador.addActionListener(new ActionListener() {
@@ -158,22 +178,27 @@ public class NetflixView {
 		btnFavorito.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (fav.contains(lista.get(count))) {
+				String idShow = lista.get(count).getShow_id();
 
-					fav.remove(lista.get(count));
+				if (favDAO.showEncontrado(idShow, idUser)) {
+					favDAO.delete(idShow, idUser);
+					btnFavorito.setBackground(Color.LIGHT_GRAY);
 
 				} else {
-
-					fav.add(lista.get(count));
-
+					favDAO.insert(idShow, idUser);
+					btnFavorito.setBackground(Color.CYAN);
 				}
-
 			}
 		});
 
 		// generar fichero de texto csv con los favoritos del usuario
 		btnGenerarFichero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String fileName = JOptionPane.showInputDialog(frmNetflix, "Nombre de tu fichero de favoritos:",
+						"FileName");
+				String separator = JOptionPane.showInputDialog(frmNetflix, "Separador a usar:",
+						",");
+				FavFileWriter.writer(fileName, idUser, separator);
 
 			}
 		});
@@ -215,8 +240,11 @@ public class NetflixView {
 				} else {
 					count++;
 				}
+
 				show();
+
 			}
+
 		});
 	}
 
@@ -254,9 +282,26 @@ public class NetflixView {
 				btnNext.setText(lista.get(count + 1).getTitle());
 			}
 
+			colorFav();
+
 			showData();
 		}
 
+	}
+
+	/**
+	 * color del boton fav dependiendo si está seleccionado como fav o no
+	 */
+	protected void colorFav() {
+		String idShow = lista.get(count).getShow_id();
+
+		if (favDAO.showEncontrado(idShow, idUser)) {
+			btnFavorito.setBackground(Color.CYAN);
+
+		} else {
+			btnFavorito.setBackground(Color.LIGHT_GRAY);
+
+		}
 	}
 
 	private void showData() {

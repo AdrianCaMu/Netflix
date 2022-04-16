@@ -4,6 +4,17 @@
   <artifactId>Netflix</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>Adrian Camara</name>
+  <developers>
+		<developer>
+			<id>acamu</id>
+			<name>Adrián Cámara Muñoz</name>
+			<email>a_adrian.camara.munoz@iespablopicasso.es</email>
+			<organization>IES Pablo Picasso</organization>
+			<roles>
+				<role>Estudiante</role>
+			</roles>
+		</developer>
+	</developers>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
