@@ -17,7 +17,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextPane;
 
-public class NetflixViewPrueba {
+/**
+ * Vista de Netflix V1.0 (no usado)
+ * @author Adrián Cámara Muñoz
+ *
+ */
+public class NetflixViewDeprecated {
 
 	// Propiedades
 	private JFrame parent;
@@ -51,7 +56,7 @@ public class NetflixViewPrueba {
 	/**
 	 * Create the application.
 	 */
-	public NetflixViewPrueba(String correo, JFrame parent) {
+	public NetflixViewDeprecated(String correo, JFrame parent) {
 		this.correo = correo;
 		this.parent = parent;
 		count = 0;
@@ -73,7 +78,7 @@ public class NetflixViewPrueba {
 	}
 
 	/**
-	 * configuracion de los distintos elementos de la pantalla
+	 * configuración de los distintos elementos de la pantalla
 	 */
 	private void configureUIComponents() {
 		frmNetflix.getContentPane().setBackground(Color.LIGHT_GRAY);
@@ -178,7 +183,7 @@ public class NetflixViewPrueba {
 	}
 
 	/**
-	 * configuracion de la activacion de los botones
+	 * configuración de la activacion de los botones
 	 */
 	private void configureListener() {
 		btnBuscador.addActionListener(new ActionListener() {
@@ -236,14 +241,14 @@ public class NetflixViewPrueba {
 			btnNext.setVisible(true);
 			btnPreview.setVisible(true);
 			
-			//Boton Anterior (muestra el titulo de la serie que se mostrará al hacer click)
+			//Botón Anterior (muestra el título de la serie que se mostrará al hacer click)
 			if(count == 0) {
 				btnPreview.setText(lista.get(lista.size()-1).getTitle());
 			}else {
 				btnPreview.setText(lista.get(count-1).getTitle());
 			}
 			
-			//Boton Posterior (muestra el titulo de la serie que se mostrará al hacer click)
+			//Botón Posterior (muestra el título de la serie que se mostrará al hacer click)
 			if(count == lista.size()-1){
 				btnNext.setText(lista.get(0).getTitle());
 			}else {
@@ -255,6 +260,9 @@ public class NetflixViewPrueba {
 		
 	}
 	
+	/**
+	 * muestra los datos de la serie
+	 */
 	private void showData() {
 		
 		if(lista.size() == 0) {

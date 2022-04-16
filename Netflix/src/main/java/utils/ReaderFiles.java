@@ -18,9 +18,8 @@ public class ReaderFiles {
 	/**
 	 * Buscar Show en un fichero
 	 * 
-	 * @param show      Show a buscar
-	 * @param fileName  Nombre del archivo en el que buscar
-	 * @param separador separadores que puede contener ese fichero
+	 * @param show     Show a buscar
+	 * @param fileName Nombre del archivo en el que buscar
 	 * @return true si encuentra el Show buscado, false si no.
 	 */
 	public boolean checkShow(Show show, String fileName) {

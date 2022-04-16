@@ -26,6 +26,12 @@ import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+/**
+ * Vista de Netflix
+ * 
+ * @author Adrián Cámara Muñoz
+ *
+ */
 public class NetflixView {
 
 	// Propiedades
@@ -80,7 +86,7 @@ public class NetflixView {
 	}
 
 	/**
-	 * configuracion de los distintos elementos de la pantalla
+	 * configuración de los distintos elementos de la pantalla
 	 */
 	private void configureUIComponents() {
 		frmNetflix.getContentPane().setBackground(Color.LIGHT_GRAY);
@@ -144,11 +150,11 @@ public class NetflixView {
 	}
 
 	/**
-	 * configuracion de la activacion de los botones
+	 * configuración de la activacion de los botones
 	 */
 	private void configureListener() {
-		
-		//cerrar sesión y volver a pantalla de login
+
+		// cerrar sesión y volver a pantalla de login
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmNetflix.dispose();
@@ -196,8 +202,26 @@ public class NetflixView {
 			public void actionPerformed(ActionEvent e) {
 				String fileName = JOptionPane.showInputDialog(frmNetflix, "Nombre de tu fichero de favoritos:",
 						"FileName");
-				String separator = JOptionPane.showInputDialog(frmNetflix, "Separador a usar:",
-						",");
+				
+				int seleccion = JOptionPane.showOptionDialog(frmNetflix,"Seleccione un separador",
+						  "Selector de separadores",JOptionPane.YES_NO_CANCEL_OPTION,
+						   JOptionPane.QUESTION_MESSAGE,null,
+						  new Object[] { "coma", "punto y coma", "tabulador" },"coma");
+				
+				String separator = null;
+
+				switch(seleccion) {
+				case 0:
+					separator = ",";
+					break;
+				case 1:
+					separator = ";";
+					break;
+				case 2:
+					separator = "\t";
+					break;
+				}
+				
 				FavFileWriter.writer(fileName, idUser, separator);
 
 			}

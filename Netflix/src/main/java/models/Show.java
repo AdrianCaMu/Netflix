@@ -1,7 +1,14 @@
 package models;
 
+/**
+ * Clase Show
+ * 
+ * @author Adrián Cámara Muñoz
+ *
+ */
 public class Show {
 
+	// Propiedades
 	private String show_id;
 	private String type;
 	private String title;
@@ -14,7 +21,24 @@ public class Show {
 	private String duration;
 	private String listed_in;
 	private String description;
+
+	// builders
 	
+	/**
+	 * Constructor de Show
+	 * @param show_id id de la serie
+	 * @param type TV Show / Movie
+	 * @param title titulo de la serie
+	 * @param director director de la serie
+	 * @param cast reparto de la serie
+	 * @param country pais de donde procede la serie
+	 * @param date_added fecha en la que se añade la serie
+	 * @param release_year año en el que se estrena la serie
+	 * @param rating valoraciones de la serie
+	 * @param duration duracion de la serie
+	 * @param listed_in Genero de la serie
+	 * @param description Descripcion de la serie
+	 */
 	public Show(String show_id, String type, String title, String director, String cast, String country,
 			String date_added, String release_year, String rating, String duration, String listed_in,
 			String description) {
@@ -32,7 +56,9 @@ public class Show {
 		this.listed_in = listed_in;
 		this.description = description;
 	}
-	
+
+	// Getters and Setters
+
 	public String getShow_id() {
 		return show_id;
 	}
@@ -136,7 +162,5 @@ public class Show {
 				+ ", rating=" + rating + ", duration=" + duration + ", listed_in=" + listed_in + ", description="
 				+ description + "]";
 	}
-	
-	
-}
 
+}

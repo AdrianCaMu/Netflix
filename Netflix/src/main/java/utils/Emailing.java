@@ -19,11 +19,24 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Enviar emails
+ * 
+ * @author Adrián Cámara Muñoz
+ *
+ */
 public class Emailing {
 
+	// cuenta desde la que enviaremos los correos
 	static final String username = Credentials.correoEmailing();
 	static final String password = Credentials.passwordEmailing();
 
+	/**
+	 * Enviamos email con codigo de validacion al usuario
+	 * 
+	 * @param correo correo al que enviar el email
+	 * @param codigo codigo de validacion a enviar
+	 */
 	public static void Mail(String correo, int codigo) {
 		Properties prop = new Properties();
 		prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -43,17 +56,17 @@ public class Emailing {
 
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("fakenetflix.soporte@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse(correo));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(correo));
 			message.setSubject("Prueba FakeNetflix");
-			message.setText("Querido usuario, esto es su codigo de registro: " + codigo + "\n\n Please do not spam my email!");
+			message.setText(
+					"Querido usuario, esto es su codigo de registro: " + codigo + "\n\n Please do not spam my email!");
 
 			Transport.send(message);
 
 			System.out.println("Done");
 
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			System.out.println("No se pudo enviar mensaje al correo seleccionado");
 		}
 	}
 }

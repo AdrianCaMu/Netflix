@@ -19,6 +19,12 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 
+/**
+ * Vista de Login
+ * 
+ * @author Adrián Cámara Muñoz
+ *
+ */
 public class LoginView {
 
 	// Propiedades
@@ -53,7 +59,7 @@ public class LoginView {
 	}
 
 	/**
-	 * configuracion de los distintos elementos de la pantalla
+	 * configuración de los distintos elementos de la pantalla
 	 */
 	private void configureUIComponents() {
 		frmLogin.getContentPane().setBackground(Color.LIGHT_GRAY);
@@ -118,7 +124,7 @@ public class LoginView {
 		lblErrorMessage.setForeground(Color.RED);
 		lblErrorMessage.setBounds(235, 410, 402, 38);
 		frmLogin.getContentPane().add(lblErrorMessage);
-		
+
 		btnRecuperarPasswd = new JButton("");
 		btnRecuperarPasswd.setIcon(new ImageIcon("assets/images/ForgottenPasswd.png"));
 		btnRecuperarPasswd.setOpaque(false);
@@ -128,7 +134,7 @@ public class LoginView {
 		btnRecuperarPasswd.setBackground(Color.WHITE);
 		btnRecuperarPasswd.setBounds(355, 544, 200, 85);
 		frmLogin.getContentPane().add(btnRecuperarPasswd);
-		
+
 		lblFondo = new JLabel("");
 		lblFondo.setIcon(new ImageIcon("assets/images/fondo.png"));
 		lblFondo.setBounds(0, 0, 886, 731);
@@ -136,7 +142,7 @@ public class LoginView {
 	}
 
 	/**
-	 * configuracion de la activacion de los botones
+	 * configuración de la activación de los botones
 	 */
 	private void configureListener() {
 		// boton login para acceder a la pokedex
@@ -146,7 +152,7 @@ public class LoginView {
 			}
 		});
 
-		// Enter tras poner user para ir al campo contraseña
+		// Enter al poner user para ir al campo password
 		tfUser.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -156,7 +162,7 @@ public class LoginView {
 			}
 		});
 
-		// Enter tras poner contraseña para acceder a la pokedex
+		// Enter al poner password para acceder a la vista de netflix
 		pfPassword.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -173,8 +179,8 @@ public class LoginView {
 				new RegisterView(frmLogin);
 			}
 		});
-		
-		//recuperar contraseña olvidada
+
+		// recuperar password olvidada
 		btnRecuperarPasswd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmLogin.dispose();
@@ -184,29 +190,28 @@ public class LoginView {
 	}
 
 	/**
-	 * comprueba si el usuario y la contraseña son correctos
+	 * comprueba si el usuario y la password son correctos
 	 */
 	private void checkLogin() {
 
 		String correo = tfUser.getText();
 		String passwd = new String(pfPassword.getPassword());
-		String passwdCodified  = Hash.HashIt(passwd, "123456");	
+		String passwdCodified = Hash.HashIt(passwd, "123456");
 
 		try {
-		
+
 			boolean logicaCorrecto = usuarioDAO.login(correo, passwdCodified);
 			if (logicaCorrecto) {
 				frmLogin.dispose();
-				//new Prueba();
+				// new Prueba();
 				new NetflixView(correo, frmLogin);
 			} else {
 				lblErrorMessage.setText("ERROR: correo o contraseña incorrectos.");
 			}
-		
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			lblErrorMessage.setText("ERROR: correo o contraseña incorrectos.");
 		}
-		
 
 	}
 }
